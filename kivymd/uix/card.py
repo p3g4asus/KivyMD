@@ -376,6 +376,8 @@ class MDCardPost(BoxLayout):
     _card_shifted = False
     _shift_x = 10
 
+    card_image_class = ObjectProperty(CardPostImage)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.card_shifted = None
@@ -386,7 +388,7 @@ class MDCardPost(BoxLayout):
             self._shift_x = dp(5)
             self.ids.root_box.x = self._shift_x
             self.card_size[1] = dp(335)
-            card_post = CardPostImage(
+            card_post = self.card_image_class(
                 source=self.source,
                 text_post=self.text_post,
                 tile_text=self.tile_text,

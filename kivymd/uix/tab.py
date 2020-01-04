@@ -358,12 +358,15 @@ class MDTabs(ThemableBehavior, AnchorLayout):
     def on_carousel_index(self, carousel, index):
         # when the index of the carousel change, update
         # tab indicator, select the current tab and reset threshold data.
-        current_tab_label = carousel.current_slide.tab_label
-        if current_tab_label.state == "normal":
-            current_tab_label._do_press()
-        self.tab_bar.update_indicator(
-            current_tab_label.x, current_tab_label.width
-        )
+        if carousel.current_slide:
+            current_tab_label = carousel.current_slide.tab_label
+            if current_tab_label.state == "normal":
+                current_tab_label._do_press()
+            self.tab_bar.update_indicator(
+                current_tab_label.x, current_tab_label.width
+            )
+        else:
+            carousel._index = 0
 
     def add_widget(self, widget, index=0, canvas=None):
         # You can add only subclass of MDTabsBase.
