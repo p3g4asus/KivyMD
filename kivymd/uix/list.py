@@ -212,6 +212,7 @@ Builder.load_string(
             text_color: root.text_color
             size_hint_y: None
             height: self.texture_size[1]
+			background_color: root.background_color
             markup: True
             shorten_from: 'right'
             shorten: True
@@ -222,6 +223,7 @@ Builder.load_string(
             font_style: root.secondary_font_style
             theme_text_color: root.secondary_theme_text_color
             text_color: root.secondary_text_color
+			background_color: root.secondary_background_color
             size_hint_y: None
             height: 0 if root._num_lines == 1 else self.texture_size[1]
             shorten: True
@@ -238,6 +240,7 @@ Builder.load_string(
             height: 0 if root._num_lines == 1 else self.texture_size[1]
             shorten: True
             shorten_from: 'right'
+			background_color: root.tertiary_background_color
             markup: True
 
 
@@ -335,6 +338,9 @@ class MDList(GridLayout):
     selected = ObjectProperty()
     _min_list_height = dp(16)
     _list_vertical_padding = dp(8)
+	background_color = ListProperty([1, 1, 1, 1])
+	secondary_background_color = ListProperty([1, 1, 1, 1])
+	tertiary_background_color = ListProperty([1, 1, 1, 1])
 
     icon = StringProperty()
 
