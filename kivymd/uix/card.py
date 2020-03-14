@@ -247,7 +247,7 @@ Builder.load_string(
 
             MDLabel:
                 id: text_post
-				background_color: root.background_color
+                background_color: root.background_color
                 text: root.text_post
                 markup: True
                 font_size: '14sp'
@@ -346,7 +346,7 @@ class MDCardPost(BoxLayout):
     text_post = StringProperty("Your text post...")
     path_to_avatar = StringProperty("data/logo/kivy-icon-512.png")
     card_size = ListProperty((Window.width - 10, dp(180)))
-	background_color = ListProperty([1, 1, 1, 1])
+    background_color = ListProperty([1, 1, 1, 1])
 
     source = StringProperty()
     tile_text = StringProperty("Title")
