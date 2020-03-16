@@ -338,9 +338,6 @@ class MDList(GridLayout):
     selected = ObjectProperty()
     _min_list_height = dp(16)
     _list_vertical_padding = dp(8)
-    background_color = ListProperty([1, 1, 1, 1])
-    secondary_background_color = ListProperty([1, 1, 1, 1])
-    tertiary_background_color = ListProperty([1, 1, 1, 1])
 
     icon = StringProperty()
 
@@ -409,6 +406,9 @@ class BaseListItem(
     divider = OptionProperty(
         "Full", options=["Full", "Inset", None], allownone=True
     )
+    background_color = ListProperty([1, 1, 1, 1])
+    secondary_background_color = ListProperty([1, 1, 1, 1])
+    tertiary_background_color = ListProperty([1, 1, 1, 1])
 
     _txt_left_pad = NumericProperty(dp(16))
     _txt_top_pad = NumericProperty()
