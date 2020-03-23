@@ -204,7 +204,7 @@ Builder.load_string(
             root._txt_left_pad, root._txt_top_pad,\
             root._txt_right_pad, root._txt_bot_pad
 
-        MDLabel:
+        BackgroundLabel:
             id: _lbl_primary
             text: root.text
             font_style: root.font_style
@@ -217,7 +217,7 @@ Builder.load_string(
             shorten_from: 'right'
             shorten: True
 
-        MDLabel:
+        BackgroundLabel:
             id: _lbl_secondary
             text: '' if root._num_lines == 1 else root.secondary_text
             font_style: root.secondary_font_style
@@ -230,7 +230,7 @@ Builder.load_string(
             shorten_from: 'right'
             markup: True
 
-        MDLabel:
+        BackgroundLabel:
             id: _lbl_tertiary
             text: '' if root._num_lines == 1 else root.tertiary_text
             font_style: root.tertiary_font_style

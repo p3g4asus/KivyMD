@@ -14,6 +14,7 @@ This file is distributed under the terms of the same license,
 as the Kivy framework.
 """
 
+from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.metrics import sp
 from kivy.properties import (
@@ -32,12 +33,21 @@ from kivymd.theming_dynamic_text import get_contrast_text_color
 Builder.load_string(
     """
 #:import md_icons kivymd.icon_definitions.md_icons
-
+#:import Window kivy.core.window.Window
 
 <MDLabel>
     disabled_color: self.theme_cls.disabled_hint_text_color
     text_size: (self.width, None)
 
+
+<BackgroundLabel>
+    background_color: Window.clearcolor
+    canvas.before:
+        Color:
+            rgba: root.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
 
 <MDIcon>:
     font_style: "Icon"
@@ -152,3 +162,12 @@ class MDLabel(ThemableBehavior, Label):
 class MDIcon(MDLabel):
     icon = StringProperty("android")
     source = StringProperty(None, allownone=True)
+
+
+class BackgroundLabel(MDLabel):
+    background_color = ListProperty()
+    
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if 'background_color' not in kwargs:
+            self.background_color = Window.clearcolor

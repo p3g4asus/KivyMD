@@ -245,7 +245,7 @@ Builder.load_string(
                     bold: True
                     font_size: '12sp'
 
-            MDLabel:
+            BackgroundLabel:
                 id: text_post
                 background_color: root.background_color
                 text: root.text_post

@@ -22,8 +22,8 @@ as the Kivy framework.
 import os
 from kivy.logger import Logger
 
-__version_info__ = (0, 103, 54)
-__version__ = "0.103.54"
+__version_info__ = (0, 103, 55)
+__version__ = "0.103.55"
 
 path = os.path.dirname(__file__)
 fonts_path = os.path.join(path, f"fonts{os.sep}")
