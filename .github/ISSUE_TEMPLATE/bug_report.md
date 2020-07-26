@@ -6,7 +6,7 @@ labels: ''
 assignees: ''
 ---
 
-#### Description of the Bug
+### Description of the Bug
 
 Your text
 
@@ -18,7 +18,7 @@ from kivy.app import App
 from kivy.lang import Builder
 
 kv = """
-BoxLayout:
+Screen:
     # KV-Code
 """
 

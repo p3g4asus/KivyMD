@@ -1,10 +1,9 @@
 from kivy.clock import Clock
 from kivy.uix.screenmanager import Screen
 
-from libs.baseclass.list_items import KitchenSinkOneLineLeftIconItem
-
 from kivymd.icon_definitions import md_icons
 from kivymd.utils import asynckivy
+from libs.baseclass.list_items import KitchenSinkOneLineLeftIconItem
 
 
 class KitchenSinkRefreshLayout(Screen):
@@ -23,7 +22,7 @@ class KitchenSinkRefreshLayout(Screen):
                 await asynckivy.sleep(0)
                 self.ids.box.add_widget(
                     KitchenSinkOneLineLeftIconItem(
-                        icon=name_icon, text=name_icon,
+                        icon=name_icon, text=name_icon
                     )
                 )
             self.ids.refresh_layout.refresh_done()

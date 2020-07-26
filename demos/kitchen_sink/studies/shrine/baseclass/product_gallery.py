@@ -1,8 +1,8 @@
 from kivy.properties import (
-    StringProperty,
-    NumericProperty,
     ListProperty,
+    NumericProperty,
     ObjectProperty,
+    StringProperty,
 )
 from kivy.uix.boxlayout import BoxLayout
 
@@ -15,7 +15,7 @@ class ProductsBox(BoxLayout):
     _root = ObjectProperty()
     paths_to_images = ListProperty()
     """List of paths to images. It should be as follows:
-    
+
     [
         [path1, path2, path3], [path1, path2, path3], ...
     ]

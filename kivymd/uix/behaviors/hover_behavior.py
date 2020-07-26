@@ -1,27 +1,112 @@
-"""Hoverable Behaviour (changing when the mouse is on the widget by O. Poyen.
-License: LGPL
 """
-__author__ = "Olivier POYEN"
-__site__ = "https://gist.github.com/opqopq/15c707dc4cffc2b6455f"
+Behaviors/Hover
+===============
+
+.. rubric:: Changing when the mouse is on the widget.
+
+To apply hover behavior, you must create a new class that is inherited from the
+widget to which you apply the behavior and from the :attr:`HoverBehavior` class.
+
+In `KV file`:
+
+.. code-block:: kv
+
+    <HoverItem@MDBoxLayout+ThemableBehavior+HoverBehavior>
+
+In `python file`:
+
+.. code-block:: python
+
+    class HoverItem(MDBoxLayout, ThemableBehavior, HoverBehavior):
+        '''Custom item implementing hover behavior.'''
+
+After creating a class, you must define two methods for it:
+:attr:`HoverBehavior.on_enter` and :attr:`HoverBehavior.on_leave`, which will be automatically called
+when the mouse cursor is over the widget and when the mouse cursor goes beyond
+the widget.
+
+.. code-block:: python
+
+    from kivy.lang import Builder
+
+    from kivymd.app import MDApp
+    from kivymd.uix.behaviors import HoverBehavior
+    from kivymd.uix.boxlayout import MDBoxLayout
+    from kivymd.theming import ThemableBehavior
+
+    KV = '''
+    Screen
+
+        MDBoxLayout:
+            id: box
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            size_hint: .8, .8
+            md_bg_color: app.theme_cls.bg_darkest
+    '''
 
 
-from kivy.properties import BooleanProperty, ObjectProperty
+    class HoverItem(MDBoxLayout, ThemableBehavior, HoverBehavior):
+        '''Custom item implementing hover behavior.'''
+
+        def on_enter(self, *args):
+            '''The method will be called when the mouse cursor
+            is within the borders of the current widget.'''
+
+            self.md_bg_color = (1, 1, 1, 1)
+
+        def on_leave(self, *args):
+            '''The method will be called when the mouse cursor goes beyond
+            the borders of the current widget.'''
+
+            self.md_bg_color = self.theme_cls.bg_darkest
+
+
+    class Test(MDApp):
+        def build(self):
+            self.screen = Builder.load_string(KV)
+            for i in range(5):
+                self.screen.ids.box.add_widget(HoverItem())
+            return self.screen
+
+
+    Test().run()
+
+.. image:: https://github.com/HeaTTheatR/KivyMD-data/raw/master/gallery/kivymddoc/hover-behavior.gif
+   :width: 250 px
+   :align: center
+"""
+
+__all__ = ("HoverBehavior",)
+
 from kivy.core.window import Window
+from kivy.factory import Factory
+from kivy.properties import BooleanProperty, ObjectProperty
 
 
 class HoverBehavior(object):
-    """Hover behavior.
+    """
     :Events:
-        `on_enter`
-            Fired when mouse enter the bbox of the widget.
-        `on_leave`
-            Fired when the mouse exit the widget
+        :attr:`on_enter`
+            Call when mouse enter the bbox of the widget.
+        :attr:`on_leave`
+            Call when the mouse exit the widget.
     """
 
     hovered = BooleanProperty(False)
+    """
+    `True`, if the mouse cursor is within the borders of the widget.
+
+    :attr:`hovered` is an :class:`~kivy.properties.BooleanProperty`
+    and defaults to `False`.
+    """
+
     border_point = ObjectProperty(None)
-    """Contains the last relevant point received by the Hoverable. This can
-    be used in `on_enter` or `on_leave` in order to know where was dispatched the event.
+    """Contains the last relevant point received by the Hoverable.
+    This can be used in :attr:`on_enter` or :attr:`on_leave` in order
+    to know where was dispatched the event.
+
+    :attr:`border_point` is an :class:`~kivy.properties.ObjectProperty`
+    and defaults to `None`.
     """
 
     def __init__(self, **kwargs):
@@ -47,45 +132,10 @@ class HoverBehavior(object):
             self.dispatch("on_leave")
 
     def on_enter(self):
-        pass
+        """Call when mouse enter the bbox of the widget."""
 
     def on_leave(self):
-        pass
+        """Call when the mouse exit the widget."""
 
-
-from kivy.factory import Factory
 
 Factory.register("HoverBehavior", HoverBehavior)
-
-
-if __name__ == "__main__":
-    from kivy.uix.floatlayout import FloatLayout
-    from kivy.lang import Builder
-    from kivy.uix.label import Label
-    from kivy.base import runTouchApp
-
-    class HoverLabel(Label, HoverBehavior):
-        def on_enter(self, *args):
-            print("You are in, through this point", self)
-
-        def on_leave(self, *args):
-            print("You left through this point", self)
-
-    Builder.load_string(
-        """
-<HoverLabel>:
-    text: "inside" if self.hovered else "outside"
-    pos: 200,200
-    size_hint: None, None
-    size: 100, 30
-    canvas.before:
-        Color:
-            rgb: 1,0,0
-        Rectangle:
-            size: self.size
-            pos: self.pos
-    """
-    )
-    fl = FloatLayout()
-    fl.add_widget(HoverLabel())
-    runTouchApp(fl)

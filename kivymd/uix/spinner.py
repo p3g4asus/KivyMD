@@ -1,23 +1,51 @@
 """
-Spinner
-=======
+Components/Spinner
+==================
 
-Copyright (c) 2015 Andrés Rodríguez and KivyMD contributors -
-    KivyMD library up to version 0.1.2
-Copyright (c) 2019 Ivanov Yuri and KivyMD contributors -
-    KivyMD library version 0.1.3 and higher
+.. rubric:: Circular progress indicator in Google's Material Design.
 
-For suggestions and questions:
-<kivydevelopment@gmail.com>
+Usage
+-----
 
-This file is distributed under the terms of the same license,
-as the Kivy framework.
+.. code-block:: python
+
+    from kivy.lang import Builder
+
+    from kivymd.app import MDApp
+
+    KV = '''
+    Screen:
+
+        MDSpinner:
+            size_hint: None, None
+            size: dp(46), dp(46)
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            active: True if check.active else False
+
+        MDCheckbox:
+            id: check
+            size_hint: None, None
+            size: dp(48), dp(48)
+            pos_hint: {'center_x': .5, 'center_y': .4}
+            active: True
+    '''
+
+
+    class Test(MDApp):
+        def build(self):
+            return Builder.load_string(KV)
+
+
+    Test().run()
+
+.. image:: https://github.com/HeaTTheatR/KivyMD-data/raw/master/gallery/kivymddoc/spinner.gif
+    :align: center
 """
 
-from kivy.lang import Builder
-from kivy.uix.widget import Widget
-from kivy.properties import NumericProperty, ListProperty, BooleanProperty
 from kivy.animation import Animation
+from kivy.lang import Builder
+from kivy.properties import BooleanProperty, ListProperty, NumericProperty
+from kivy.uix.widget import Widget
 
 from kivymd.theming import ThemableBehavior
 
@@ -47,7 +75,7 @@ Builder.load_string(
 
 class MDSpinner(ThemableBehavior, Widget):
     """:class:`MDSpinner` is an implementation of the circular progress
-    indicator in Google's Material Design.
+    indicator in `Google's Material Design`.
 
     It can be used either as an indeterminate indicator that loops while
     the user waits for something to happen, or as a determinate indicator.
@@ -57,25 +85,28 @@ class MDSpinner(ThemableBehavior, Widget):
     """
 
     determinate = BooleanProperty(False)
-    """:attr:`determinate` is a :class:`~kivy.properties.BooleanProperty` and
-    defaults to False
+    """
+    :attr:`determinate` is a :class:`~kivy.properties.BooleanProperty`
+    and defaults to `False`.
     """
 
     determinate_time = NumericProperty(2)
-    """:attr:`determinate_time` is a :class:`~kivy.properties.NumericProperty`
-    and defaults to 2
+    """
+    :attr:`determinate_time` is a :class:`~kivy.properties.NumericProperty`
+    and defaults to `2`.
     """
 
     active = BooleanProperty(True)
     """Use :attr:`active` to start or stop the spinner.
 
-    :attr:`active` is a :class:`~kivy.properties.BooleanProperty` and
-    defaults to True
+    :attr:`active` is a :class:`~kivy.properties.BooleanProperty`
+    and defaults to `True`.
     """
 
     color = ListProperty([0, 0, 0, 0])
-    """:attr:`color` is a :class:`~kivy.properties.ListProperty` and
-    defaults to 'self.theme_cls.primary_color'
+    """
+    :attr:`color` is a :class:`~kivy.properties.ListProperty`
+    and defaults to ``self.theme_cls.primary_color``.
     """
 
     _alpha = NumericProperty(0)

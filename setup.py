@@ -1,7 +1,8 @@
-import sys
-from setuptools import setup
-from os.path import join, dirname
 import re
+import sys
+from os.path import dirname, join
+
+from setuptools import setup
 
 assert sys.version_info >= (3, 6, 0), "KivyMD requires Python 3.6+"
 
@@ -45,8 +46,21 @@ if __name__ == "__main__":
                 "fonts/*.ttf",
             ]
         },
-        extras_require={},
-        install_requires=["kivy", "pillow", "requests"],
+        extras_require={
+            "dev": [
+                "pre-commit",
+                "black",
+                "isort[pyproject]",
+                "flake8",
+                "pytest",
+                "pytest-cov",
+                "pytest_asyncio",
+                "pytest-timeout",
+                "coveralls",
+            ],
+            "docs": ["sphinx", "sphinx-autoapi", "sphinx_rtd_theme"],
+        },
+        install_requires=["kivy", "requests"],
         setup_requires=[],
         python_requires=">=3.6",
     )

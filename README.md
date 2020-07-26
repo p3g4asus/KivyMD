@@ -1,4 +1,4 @@
-KivyMD [v0.103.0 - *Beta*](https://github.com/HeaTTheatR/KivyMD/blob/master/CHANGELOG.md)
+KivyMD [v0.104.1](https://kivymd.readthedocs.io/en/latest/changelog/index.html)
 ======
 
 <img align="left" width="256" src="https://github.com/HeaTTheatR/KivyMD/raw/master/kivymd/images/kivy-logo-white-512.png"/>
@@ -9,26 +9,36 @@ The project's goal is to approximate Google's [Material Design spec](https://mat
 
 This library is a fork of the [KivyMD project](https://gitlab.com/kivymd/KivyMD) the author of which stopped supporting this project three years ago. We found the strength and brought this project to a new level.
 
-Currently we're in **alpha** status, so things are changing all the time and we cannot promise any kind of API stability. However it is safe to vendor now and make use of what's currently available.
+Currently we're in **beta** status, so things are changing all the time and we cannot promise any kind of API stability. However it is safe to vendor now and make use of what's currently available.
 
 Join the project! Just fork the project, branch out and submit a pull request when your patch is ready. If any changes are necessary, we'll guide you through the steps that need to be done via PR comments or access to your for may be requested to outright submit them.
 
 If you wish to become a project developer (permission to create branches on the project without forking for easier collaboration), have at least one PR approved and ask for it. If you contribute regularly to the project the role may be offered to you without asking too.
 
-[![Latest version on PyPI](https://img.shields.io/pypi/v/kivymd.svg)](https://pypi.org/project/kivymd)
+[![PyPI version](https://img.shields.io/pypi/v/kivymd.svg)](https://pypi.org/project/kivymd)
 [![Supported Python versions](https://img.shields.io/pypi/pyversions/kivymd.svg)](#Installation)
 [![Downloads](https://pepy.tech/badge/kivymd)](https://pepy.tech/project/kivymd)
 [![Code style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Documentation Status](https://readthedocs.org/projects/kivymd/badge/?version=latest)](https://kivymd.readthedocs.io/en/latest/?badge=latest)
-[![Build status](https://travis-ci.org/HeaTTheatR/KivyMD.svg?branch=master)](https://travis-ci.org/HeaTTheatR/KivyMD)
-[![Discord server](https://img.shields.io/discord/566880874789076992?logo=discord)](https://discord.gg/wu3qBST)
+
+[![Discord](https://img.shields.io/discord/566880874789076992?logo=discord)](https://discord.gg/wu3qBST)
+[![Twitter](https://img.shields.io/twitter/follow/KivyMD?label=follow&logo=twitter&style=flat&color=brightgreen)](https://twitter.com/KivyMD)
+[![YouTube](https://img.shields.io/static/v1?label=subscribe&logo=youtube&logoColor=ff0000&color=brightgreen&message=1K)](https://www.youtube.com/c/KivyMD)
+[![Habr](https://img.shields.io/static/v1?label=habr&message=ru&logo=habr&color=brightgreen)](https://habr.com/ru/users/kivymd/posts)
+[![Open Collective](https://img.shields.io/opencollective/all/kivymd?label=financial%20contributors&logo=open-collective)](https://opencollective.com/KivyMD)
+
+[![Coverage status](https://coveralls.io/repos/github/HeaTTheatR/KivyMD/badge.svg)](https://coveralls.io/github/HeaTTheatR/KivyMD)
+[![Lint workflow](https://github.com/HeaTTheatR/KivyMD/workflows/Lint/badge.svg?branch=master)](https://github.com/HeaTTheatR/KivyMD/actions?query=workflow%3ALint)
+[![Build workflow](https://github.com/HeaTTheatR/KivyMD/workflows/Build/badge.svg?branch=master)](https://github.com/HeaTTheatR/KivyMD/actions?query=workflow%3ABuild)
+[![Test workflow](https://github.com/HeaTTheatR/KivyMD/workflows/Test/badge.svg?branch=master)](https://github.com/HeaTTheatR/KivyMD/actions?query=workflow%3ATest)
+[![Build demos workflow](https://github.com/HeaTTheatR/KivyMD/workflows/Build%20demos/badge.svg?branch=master)](https://github.com/HeaTTheatR/KivyMD/actions?query=workflow%3A"Build+demos")
+[![Documentation status](https://readthedocs.org/projects/kivymd/badge/?version=latest)](https://kivymd.readthedocs.io)
 
 Documentation
 =============
 
-#### Wiki
+See documentation at https://kivymd.readthedocs.io/en/latest/
 
-No complete documentation yet. Our [Wiki](https://github.com/HeaTTheatR/KivyMD/wiki) contains some examples of using KivyMD widgets.
+Wiki with examples of using KivyMD widgets: https://github.com/HeaTTheatR/KivyMD/wiki
 
 #### Demos
 
@@ -39,8 +49,6 @@ No complete documentation yet. Our [Wiki](https://github.com/HeaTTheatR/KivyMD/w
 </p>
 
 [Kitchen sink](https://github.com/HeaTTheatR/KivyMD/tree/master/demos/kitchen_sink) app demonstrates every KivyMD widget. You can see how to use widget in code of app. You can download apk for your smartphone (Android 6.0 and higher):  [kitchen_sink-0.102.1-x86.apk](https://github.com/HeaTTheatR/KivyMD-data/tree/master/bin/x86) or [kitchen_sink-0.103.0-armeabi-v7a.apk](https://github.com/HeaTTheatR/KivyMD-data/tree/master/bin/armeabi-v7a).
-
-[Another demo applications](https://github.com/HeaTTheatR/KivyMD/tree/master/demos/kitchen_sink/demo_apps) contain some useful GUI examples.
 
 #### Tutorials on YouTube
 
@@ -58,10 +66,8 @@ Support
 
 If you need assistance or you have a question, you can ask for help on our mailing list:
 
-* **Discord server (priority):** https://discord.gg/wu3qBST (English #support, Russian #ru-support)
-* VK group: https://vk.com/kivy_development (Russian)
-* Google group: https://groups.google.com/forum/#!categories/kivymd-users-support (English)
-* Email: kivydevelopment@gmail.com
+* **Discord server:** https://discord.gg/wu3qBST (English #support, Russian #ru-support)
+* *Email:* kivydevelopment@gmail.com
 
 
 Installation
@@ -70,7 +76,6 @@ Installation
 #### Dependencies:
 
 * [Kivy](https://github.com/kivy/kivy) >= 1.10.1 ([Installation](https://kivy.org/doc/stable/gettingstarted/installation.html))
-* [PIL](https://github.com/python-pillow/Pillow) ([Installation](https://pillow.readthedocs.io/en/stable/installation.html#basic-installation))
 * [Python 3.6+](https://www.python.org/) *(Python 2 not supported)*
 
 #### How to install
@@ -97,6 +102,9 @@ Also you can install manually from sources. Just clone the project and run the s
 ```bash
 python3 ./setup.py install
 ```
+
+***Speed Tip***: If you don't need full commit history, you can use a shallow clone
+(`git clone git@github.com:HeaTTheatR/KivyMD.git --depth 1`) to save time.
 
 #### How to use with [Buildozer](https://github.com/kivy/buildozer)
 
@@ -145,36 +153,13 @@ Settings
 #### [Syntax highlighting and auto-completion for Kivy/KivyMD .kv files in PyCharm/Intellij IDEA](https://github.com/noembryo/KV4Jetbrains)
 
 
-
-
 API Breaking changes
 ====================
 
-* [Using MDNavigationDrawer has changed](https://github.com/HeaTTheatR/KivyMD/wiki/Components-Navigation-Drawer#using-mdnavigationdrawer-has-changed)
-* App object should be inherited from `kivymd.app.MDApp`. See wiki for example
-and more information:
-[Material App on KivyMD wiki](https://github.com/HeaTTheatR/KivyMD/wiki/Modules-Material-App).
-* All classes with the Behavior prefix moved to `kivymd.uix.behaviors` module.
-* All uix modules moved to `kivymd.uix` module.
-* All widgets that usually used in kv-lang are automatically added to Factory.
-You don't need to `#:import` them. Remove all your imports from kv files.
-* Replaced `MDAccordion` and `MDAccordionListItem` with `MDExpansionPanel`.
-* Changed font styles:
-
-| Old      | New       |
-|----------|-----------|
-| Icon     | Icon      |
-| -        | Overline  |
-| -        | Subtitle2 |
-| Subhead  | Subtitle1 |
-| Title    | H6        |
-| Headline | H5        |
-| Display1 | H4        |
-| Display2 | H3        |
-| Display3 | H2        |
-| Display4 | H1        |
-
-* Colors `BlueGrey` and `Grey` renamed to `BlueGray` and `Gray`
+* [Changed MDExpansionPanel panel creation](https://kivymd.readthedocs.io/en/latest/components/expansion-panel/index.html)
+* [Changed the use of the MDDropdownMenu](https://kivymd.readthedocs.io/en/latest/components/menu/index.html)
+* [Changed the use of the MDDropDownItem](https://kivymd.readthedocs.io/en/latest/components/dropdown-item/index.html)
+* [Changed the use of the MDDialog](https://kivymd.readthedocs.io/en/latest/components/dialog/index.html)
 
 Video preview
 =============
@@ -203,6 +188,25 @@ and [Pull requests](https://github.com/HeaTTheatR/KivyMD/pulls)!
 Check out [CONTRIBUTING.md](https://github.com/HeaTTheatR/KivyMD/blob/master/.github/CONTRIBUTING.md)
 and feel free to improve KivyMD.
 
+Setup environment
+-----------------
+
+We recommend you to use PyCharm to work with KivyMD code. Install
+[Kivy](https://kivy.org/doc/stable/gettingstarted/installation.html) and
+development dependencies to your virtual environment:
+
+```bash
+pip install -e .[dev,docs]
+pre-commit install
+```
+
+Format all files and run tests:
+```bash
+pre-commit run --all-files
+pytest kivymd/tests --timeout=300 --cov=kivymd --cov-report=term
+```
+
+pre-commit will format modified files with Black and sort imports with isort.
 
 Sister projects
 ===============
@@ -218,3 +222,33 @@ KivyMD is released under the terms of the [MIT License](https://github.com/HeaTT
 [Roboto font](https://fonts.google.com/specimen/Roboto) is licensed and distributed under the terms of the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
 [Iconic font](https://github.com/Templarian/MaterialDesign-Webfont) by the [Material Design Icons](https://materialdesignicons.com/) community covered by [SIL Open Font License 1.1](http://scripts.sil.org/cms/scripts/page.php?item_id=OFL_web)
+
+## Contributors
+
+### Code Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](.github/CONTRIBUTING.md)].
+<a href="https://github.com/HeaTTheatR/KivyMD/graphs/contributors"><img src="https://opencollective.com/KivyMD/contributors.svg?width=890&button=false" /></a>
+
+### Financial Contributors
+
+Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/KivyMD/contribute)]
+
+#### Individuals
+
+<a href="https://opencollective.com/KivyMD"><img src="https://opencollective.com/KivyMD/individuals.svg?width=890"></a>
+
+#### Organizations
+
+Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/KivyMD/contribute)]
+
+<a href="https://opencollective.com/KivyMD/organization/0/website"><img src="https://opencollective.com/KivyMD/organization/0/avatar.svg"></a>
+<a href="https://opencollective.com/KivyMD/organization/1/website"><img src="https://opencollective.com/KivyMD/organization/1/avatar.svg"></a>
+<a href="https://opencollective.com/KivyMD/organization/2/website"><img src="https://opencollective.com/KivyMD/organization/2/avatar.svg"></a>
+<a href="https://opencollective.com/KivyMD/organization/3/website"><img src="https://opencollective.com/KivyMD/organization/3/avatar.svg"></a>
+<a href="https://opencollective.com/KivyMD/organization/4/website"><img src="https://opencollective.com/KivyMD/organization/4/avatar.svg"></a>
+<a href="https://opencollective.com/KivyMD/organization/5/website"><img src="https://opencollective.com/KivyMD/organization/5/avatar.svg"></a>
+<a href="https://opencollective.com/KivyMD/organization/6/website"><img src="https://opencollective.com/KivyMD/organization/6/avatar.svg"></a>
+<a href="https://opencollective.com/KivyMD/organization/7/website"><img src="https://opencollective.com/KivyMD/organization/7/avatar.svg"></a>
+<a href="https://opencollective.com/KivyMD/organization/8/website"><img src="https://opencollective.com/KivyMD/organization/8/avatar.svg"></a>
+<a href="https://opencollective.com/KivyMD/organization/9/website"><img src="https://opencollective.com/KivyMD/organization/9/avatar.svg"></a>

@@ -1,183 +1,117 @@
 """
-Chips
-=====
+Components/Chip
+===============
 
-Copyright (c) 2019 Ivanov Yuri
+.. seealso::
 
-For suggestions and questions:
-<kivydevelopment@gmail.com>
+    `Material Design spec, Chips <https://material.io/components/chips>`_
 
-This file is distributed under the terms of the same license,
-as the Kivy framework.
+.. rubric:: Chips are compact elements that represent an input, attribute, or action.
 
-`Material Design spec, Chips <https://material.io/design/components/chips.html>`_
+.. image:: https://github.com/HeaTTheatR/KivyMD-data/raw/master/gallery/kivymddoc/chips.png
+    :align: center
 
-Example
--------
+Usage
+-----
 
-from kivymd.app import MDApp
-from kivy.lang import Builder
+.. code-block:: kv
 
-from kivymd.theming import ThemeManager
+    MDChip:
+        label: 'Coffee'
+        color: .4470588235118, .1960787254902, 0, 1
+        icon: 'coffee'
+        callback: app.callback_for_menu_items
 
-kv = '''
-BoxLayout:
-    orientation: 'vertical'
-    spacing: dp(10)
+The user function takes two arguments - the object and the text of the chip:
 
-    MDToolbar:
-        title: 'Example Chips'
-        md_bg_color: app.theme_cls.primary_color
-        left_action_items: [['menu', lambda x: x]]
-        background_palette: 'Primary'
+.. code-block:: python
 
-    ScrollView:
+    def callback_for_menu_items(self, instance, value):
+        print(instance, value)
 
-        GridLayout:
-            padding: dp(10)
-            spacing: dp(10)
-            cols: 1
-            size_hint_y: None
-            height: self.minimum_height
+.. image:: https://github.com/HeaTTheatR/KivyMD-data/raw/master/gallery/kivymddoc/ordinary-chip.png
+    :align: center
 
-            MDLabel:
-                text: 'Chips with color:'
+Use custom icon
+---------------
 
-            MDSeparator:
+.. code-block:: kv
 
-            StackLayout:
-                size_hint_y: None
-                height: self.minimum_height
-                spacing: dp(5)
+    MDChip:
+        label: 'Kivy'
+        icon: 'data/logo/kivy-icon-256.png'
 
-                MDChip:
-                    label: 'Coffee'
-                    color: .4470588235294118, .19607843137254902, 0, 1
-                    icon: 'coffee'
-                    callback: app.callback
+.. image:: https://github.com/HeaTTheatR/KivyMD-data/raw/master/gallery/kivymddoc/chip-custom-icon.png
+    :align: center
 
-                MDChip:
-                    label: 'Duck'
-                    color: .9215686274509803, 0, 0, 1
-                    icon: 'duck'
-                    callback: app.callback
+Use without icon
+----------------
 
-                MDChip:
-                    label: 'Earth'
-                    color: .21176470588235294, .09803921568627451, 1, 1
-                    icon: 'earth'
-                    callback: app.callback
+.. code-block:: kv
 
-                MDChip:
-                    label: 'Face'
-                    color: .20392156865098, .48235294117606, .43529411764705883, 1
-                    icon: 'face'
-                    callback: app.callback
+    MDChip:
+        label: 'Without icon'
+        icon: ''
 
-                MDChip:
-                    label: 'Facebook'
-                    color: .5607843137254902, .48235294164706, .435294117705883, 1
-                    icon: 'facebook'
-                    callback: app.callback
+.. image:: https://github.com/HeaTTheatR/KivyMD-data/raw/master/gallery/kivymddoc/chip-without-icon.png
+    :align: center
 
-            Widget:
-                size_hint_y: None
-                height: dp(5)
+Chips with check
+----------------
 
-            MDLabel:
-                text: 'Chip without icon:'
+.. code-block:: kv
 
-            MDSeparator:
+    MDChip:
+        label: 'Check with icon'
+        icon: 'city'
+        check: True
 
-            StackLayout:
-                size_hint_y: None
-                height: self.minimum_height
-                spacing: dp(5)
+.. image:: https://github.com/HeaTTheatR/KivyMD-data/raw/master/gallery/kivymddoc/chip-check-icon.gif
+    :align: center
 
-                MDChip:
-                    label: 'Without icon'
-                    icon: ''
-                    callback: app.callback
+Choose chip
+-----------
 
-            Widget:
-                size_hint_y: None
-                height: dp(5)
+.. code-block:: kv
 
-            MDLabel:
-                text: 'Chips with check:'
+    MDChooseChip:
 
-            MDSeparator:
+        MDChip:
+            label: 'Earth'
+            icon: 'earth'
+            selected_chip_color: .21176470535294, .098039627451, 1, 1
 
-            StackLayout:
-                size_hint_y: None
-                height: self.minimum_height
-                spacing: dp(5)
+        MDChip:
+            label: 'Face'
+            icon: 'face'
+            selected_chip_color: .21176470535294, .098039627451, 1, 1
 
-                MDChip:
-                    label: 'Check'
-                    icon: ''
-                    check: True
-                    callback: app.callback
+        MDChip:
+            label: 'Facebook'
+            icon: 'facebook'
+            selected_chip_color: .21176470535294, .098039627451, 1, 1
 
-                MDChip:
-                    label: 'Check with icon'
-                    icon: 'city'
-                    check: True
-                    callback: app.callback
-            Widget:
-                size_hint_y: None
-                height: dp(5)
+.. image:: https://github.com/HeaTTheatR/KivyMD-data/raw/master/gallery/kivymddoc/chip-shoose-icon.gif
+    :align: center
 
-            MDLabel:
-                text: 'Choose chip:'
-
-            MDSeparator:
-
-            MDChooseChip:
-
-                MDChip:
-                    label: 'Earth'
-                    icon: 'earth'
-                    callback: app.callback
-
-                MDChip:
-                    label: 'Face'
-                    icon: 'face'
-                    callback: app.callback
-
-                MDChip:
-                    label: 'Facebook'
-                    icon: 'facebook'
-                    callback: app.callback
-'''
-
-
-class MyApp(MDApp):
-
-    def callback(self, name_chip):
-        pass
-
-    def build(self):
-        return Builder.load_string(kv)
-
-
-MyApp().run()
+.. Note:: `See full example <https://github.com/HeaTTheatR/KivyMD/wiki/Components-Chip>`_
 """
+
 from kivy.animation import Animation
+from kivy.lang import Builder
 from kivy.metrics import dp
 from kivy.properties import (
-    StringProperty,
-    ListProperty,
-    ObjectProperty,
     BooleanProperty,
+    ListProperty,
     NumericProperty,
+    ObjectProperty,
+    StringProperty,
 )
 from kivy.uix.boxlayout import BoxLayout
-from kivy.lang import Builder
-from kivy.uix.stacklayout import StackLayout
 
-from kivymd.uix.button import MDIconButton
 from kivymd.theming import ThemableBehavior
+from kivymd.uix.button import MDIconButton
+from kivymd.uix.stacklayout import MDStackLayout
 
 Builder.load_string(
     """
@@ -185,8 +119,7 @@ Builder.load_string(
 
 
 <MDChooseChip>
-    size_hint_y: None
-    height: self.minimum_height
+    adaptive_height: True
     spacing: "5dp"
 
 
@@ -206,15 +139,13 @@ Builder.load_string(
             size: self.size
             radius: [root.radius]
 
-    BoxLayout:
+    MDBoxLayout:
         id: box_check
-        size_hint: None, None
-        size: self.minimum_size
+        adaptive_size: True
         pos_hint: {'center_y': .5}
 
-    BoxLayout:
-        size_hint_x: None
-        width: self.minimum_width
+    MDBoxLayout:
+        adaptive_width: True
         padding: dp(10)
 
         Label:
@@ -222,6 +153,7 @@ Builder.load_string(
             text: root.label
             size_hint_x: None
             width: self.texture_size[0]
+            color: root.text_color if root.text_color else (root.theme_cls.text_color)
 
     MDIconButton:
         id: icon
@@ -231,31 +163,68 @@ Builder.load_string(
         pos_hint: {"center_y": .5}
         user_font_size: "20dp"
         disabled: True
+        md_bg_color_disabled: 0, 0, 0, 0
 """
 )
 
 
 class MDChip(BoxLayout, ThemableBehavior):
     label = StringProperty()
-    """`MDChip` text."""
+    """Chip text.
+
+    :attr:`label` is an :class:`~kivy.properties.StringProperty`
+    and defaults to `''`.
+    """
 
     icon = StringProperty("checkbox-blank-circle")
-    """`MDChip` icon."""
+    """Chip icon.
+
+    :attr:`icon` is an :class:`~kivy.properties.StringProperty`
+    and defaults to `'checkbox-blank-circle'`.
+    """
 
     color = ListProperty()
-    """`MDChip` color."""
+    """Chip color in ``rgba`` format.
+
+    :attr:`color` is an :class:`~kivy.properties.ListProperty`
+    and defaults to `[]`.
+    """
+
+    text_color = ListProperty()
+    """Chip's text color in ``rgba`` format.
+
+    :attr:`text_color` is an :class:`~kivy.properties.ListProperty`
+    and defaults to `[]`.
+    """
 
     check = BooleanProperty(False)
-    """If True, a checkmark is added to the left when touch to the chip."""
+    """
+    If True, a checkmark is added to the left when touch to the chip.
+
+    :attr:`check` is an :class:`~kivy.properties.BooleanProperty`
+    and defaults to `False`.
+    """
 
     callback = ObjectProperty()
-    """Custom method."""
+    """Custom method.
 
-    radius = NumericProperty(dp(12))
-    """Corner radius values."""
+    :attr:`callback` is an :class:`~kivy.properties.ObjectProperty`
+    and defaults to `None`.
+    """
+
+    radius = NumericProperty("12dp")
+    """Corner radius values.
+
+    :attr:`radius` is an :class:`~kivy.properties.NumericProperty`
+    and defaults to `'12dp'`.
+    """
 
     selected_chip_color = ListProperty()
-    """The color of the chip that is currently selected."""
+    """The color of the chip that is currently selected in ``rgba`` format.
+
+    :attr:`selected_chip_color` is an :class:`~kivy.properties.ListProperty`
+    and defaults to `[]`.
+    """
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -300,7 +269,7 @@ class MDChip(BoxLayout, ThemableBehavior):
                 self.callback(self, self.label)
 
 
-class MDChooseChip(StackLayout):
+class MDChooseChip(MDStackLayout):
     def add_widget(self, widget, index=0, canvas=None):
-        if widget.__class__ is MDChip:
+        if isinstance(widget, MDChip):
             return super().add_widget(widget)

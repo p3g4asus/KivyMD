@@ -1,4 +1,8 @@
-"""An Effect to be used with ScrollView to prevent scrolling beyond
+"""
+Stiff Scroll Effect
+===================
+
+An Effect to be used with ScrollView to prevent scrolling beyond
 the bounds, but politely.
 
 A ScrollView constructed with StiffScrollEffect,
@@ -26,55 +30,87 @@ from time import time
 
 from kivy.animation import AnimationTransition
 from kivy.effects.kinetic import KineticEffect
-from kivy.properties import ObjectProperty, NumericProperty
+from kivy.properties import NumericProperty, ObjectProperty
 from kivy.uix.widget import Widget
 
 
 class StiffScrollEffect(KineticEffect):
     drag_threshold = NumericProperty("20sp")
     """Minimum distance to travel before the movement is considered as a
-    drag."""
+    drag.
+
+    :attr:`drag_threshold` is an :class:`~kivy.properties.NumericProperty`
+    and defaults to `'20sp'`.
+    """
 
     min = NumericProperty(0)
-    """Minimum boundary to stop the scrolling at."""
+    """Minimum boundary to stop the scrolling at.
+
+    :attr:`min` is an :class:`~kivy.properties.NumericProperty`
+    and defaults to `0`.
+    """
 
     max = NumericProperty(0)
-    """Maximum boundary to stop the scrolling at."""
+    """Maximum boundary to stop the scrolling at.
+
+    :attr:`max` is an :class:`~kivy.properties.NumericProperty`
+    and defaults to `0`.
+    """
 
     max_friction = NumericProperty(1)
-    """How hard should it be to scroll, at the worst?"""
+    """How hard should it be to scroll, at the worst?
+
+    :attr:`max_friction` is an :class:`~kivy.properties.NumericProperty`
+    and defaults to `1`.
+    """
 
     body = NumericProperty(0.7)
-    """Proportion of the range in which you can scroll unimpeded."""
+    """Proportion of the range in which you can scroll unimpeded.
+
+    :attr:`body` is an :class:`~kivy.properties.NumericProperty`
+    and defaults to `0.7`.
+    """
 
     scroll = NumericProperty(0.0)
-    """Computed value for scrolling"""
+    """Computed value for scrolling
+
+    :attr:`scroll` is an :class:`~kivy.properties.NumericProperty`
+    and defaults to `0.0`.
+    """
 
     transition_min = ObjectProperty(AnimationTransition.in_cubic)
     """The AnimationTransition function to use when adjusting the friction
     near the minimum end of the effect.
 
+    :attr:`transition_min` is an :class:`~kivy.properties.ObjectProperty`
+    and defaults to :class:`kivy.animation.AnimationTransition`.
     """
 
     transition_max = ObjectProperty(AnimationTransition.in_cubic)
     """The AnimationTransition function to use when adjusting the friction
     near the maximum end of the effect.
 
+    :attr:`transition_max` is an :class:`~kivy.properties.ObjectProperty`
+    and defaults to :class:`kivy.animation.AnimationTransition`.
     """
 
     target_widget = ObjectProperty(None, allownone=True, baseclass=Widget)
-    """The widget to apply the effect to."""
+    """The widget to apply the effect to.
+
+    :attr:`target_widget` is an :class:`~kivy.properties.ObjectProperty`
+    and defaults to ``None``.
+    """
 
     displacement = NumericProperty(0)
-    """The absolute distance moved in either direction."""
+    """The absolute distance moved in either direction.
 
-    scroll = NumericProperty(0.0)
-    """The distance to be used for scrolling."""
+    :attr:`displacement` is an :class:`~kivy.properties.NumericProperty`
+    and defaults to `0`.
+    """
 
     def __init__(self, **kwargs):
         """Set ``self.base_friction`` to the value of ``self.friction`` just
         after instantiation, so that I can reset to that value later.
-
         """
 
         super().__init__(**kwargs)
@@ -83,7 +119,6 @@ class StiffScrollEffect(KineticEffect):
     def update_velocity(self, dt):
         """Before actually updating my velocity, meddle with ``self.friction``
         to make it appropriate to where I'm at, currently.
-
         """
 
         hard_min = self.min
@@ -121,10 +156,10 @@ class StiffScrollEffect(KineticEffect):
     def on_value(self, *args):
         """Prevent moving beyond my bounds, and update ``self.scroll``"""
 
-        if self.value < self.min:
+        if self.value > self.min:
             self.velocity = 0
             self.scroll = self.min
-        elif self.value > self.max:
+        elif self.value < self.max:
             self.velocity = 0
             self.scroll = self.max
         else:
@@ -142,7 +177,6 @@ class StiffScrollEffect(KineticEffect):
     def update(self, val, t=None):
         """Reduce the impact of whatever change has been made to me, in
         proportion with my current friction.
-
         """
 
         t = t or time()

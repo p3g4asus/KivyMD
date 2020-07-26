@@ -1,19 +1,17 @@
 """
-Color Definitions
-=====
+Themes/Color Definitions
+========================
 
-Copyright (c) 2015 Andrés Rodríguez and KivyMD contributors -
-    KivyMD library up to version 0.1.2
-Copyright (c) 2019 Ivanov Yuri and KivyMD contributors -
-    KivyMD library version 0.1.3 and higher
+.. seealso::
 
-For suggestions and questions:
-<kivydevelopment@gmail.com>
+   `Material Design spec, The color system <https://material.io/design/color/the-color-system.html>`_
 
-This file is distributed under the terms of the same license,
-as the Kivy framework.
+Material colors palette to use in :class:`kivymd.theming.ThemeManager`.
+:data:`~colors` is a dict-in-dict where the first key is a value from
+:data:`~palette` and the second key is a value from :data:`~hue`. Color is a hex
+value, a string of 6 characters (0-9, A-F) written in uppercase.
 
-`Material Design spec, The color system <https://material.io/design/color/the-color-system.html>`_
+For example, ``colors["Red"]["900"]`` is ``"B71C1C"``.
 """
 
 colors = {
@@ -329,12 +327,115 @@ colors = {
     },
     "Dark": {
         "StatusBar": "000000",
-        "AppBar": "212121",
-        "Background": "303030",
-        "CardsDialogs": "424242",
+        "AppBar": "1f1f1f",
+        "Background": "121212",
+        "CardsDialogs": "212121",
         "FlatButtonDown": "999999",
     },
 }
+"""Color palette. Taken from `2014 Material Design color palettes
+<https://material.io/design/color/the-color-system.html>`_.
+
+To demonstrate the shades of the palette, you can run the following code:
+
+.. code-block:: python
+
+    from kivy.lang import Builder
+    from kivy.uix.boxlayout import BoxLayout
+    from kivy.utils import get_color_from_hex
+    from kivy.properties import ListProperty, StringProperty
+
+    from kivymd.color_definitions import colors
+    from kivymd.uix.tab import MDTabsBase
+
+    demo = '''
+    <Root@BoxLayout>
+        orientation: 'vertical'
+
+        MDToolbar:
+            title: app.title
+
+        MDTabs:
+            id: android_tabs
+            on_tab_switch: app.on_tab_switch(*args)
+            size_hint_y: None
+            height: "48dp"
+            tab_indicator_anim: False
+
+        ScrollView:
+
+            MDList:
+                id: box
+
+
+    <ItemColor>:
+        size_hint_y: None
+        height: "42dp"
+
+        canvas:
+            Color:
+                rgba: root.color
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        MDLabel:
+            text: root.text
+            halign: "center"
+
+
+    <Tab>:
+    '''
+
+    from kivy.factory import Factory
+    from kivymd.app import MDApp
+
+
+    class Tab(BoxLayout, MDTabsBase):
+        pass
+
+
+    class ItemColor(BoxLayout):
+        text = StringProperty()
+        color = ListProperty()
+
+
+    class Palette(MDApp):
+        title = "Colors definitions"
+
+        def build(self):
+            Builder.load_string(demo)
+            self.screen = Factory.Root()
+
+            for name_tab in colors.keys():
+                tab = Tab(text=name_tab)
+                self.screen.ids.android_tabs.add_widget(tab)
+            return self.screen
+
+        def on_tab_switch(self, instance_tabs, instance_tab, instance_tabs_label, tab_text):
+            self.screen.ids.box.clear_widgets()
+            for value_color in colors[tab_text]:
+                self.screen.ids.box.add_widget(
+                    ItemColor(
+                        color=get_color_from_hex(colors[tab_text][value_color]),
+                        text=value_color,
+                    )
+                )
+
+        def on_start(self):
+            self.on_tab_switch(
+                None,
+                None,
+                None,
+                self.screen.ids.android_tabs.ids.layout.children[-1].text,
+            )
+
+
+    Palette().run()
+
+.. image:: https://github.com/HeaTTheatR/KivyMD-data/raw/master/gallery/kivymddoc/palette.gif
+    :align: center
+"""
 
 palette = [
     "Red",
@@ -357,6 +458,8 @@ palette = [
     "Gray",
     "BlueGray",
 ]
+"""Valid values for color palette selecting."""
+
 hue = [
     "50",
     "100",
@@ -373,6 +476,7 @@ hue = [
     "A400",
     "A700",
 ]
+"""Valid values for color hue selecting."""
 
 
 light_colors = {
@@ -500,18 +604,8 @@ light_colors = {
     "Dark": [],
     "Light": ["White", "MainBackground", "DialogBackground"],
 }
+"""Which colors are light. Other are dark."""
 
-"""
-# How to generate text_colors dict:
-text_colors = {}
-for p in palette:
-    text_colors[p] = {}
-    for h in hue:
-        if h in light_colors[p]:
-            text_colors[p][h] = '000000'
-        else:
-            text_colors[p][h] = 'FFFFFF'
-"""
 text_colors = {
     "Red": {
         "50": "000000",
@@ -818,6 +912,22 @@ text_colors = {
         "A700": "FFFFFF",
     },
 }
+"""Text colors generated from :data:`~light_colors`. "000000" for light and
+"FFFFFF" for dark.
+
+How to generate text_colors dict
+
+.. code-block:: python
+
+   text_colors = {}
+   for p in palette:
+       text_colors[p] = {}
+       for h in hue:
+           if h in light_colors[p]:
+               text_colors[p][h] = "000000"
+           else:
+               text_colors[p][h] = "FFFFFF"
+"""
 
 theme_colors = [
     "Primary",
@@ -831,3 +941,4 @@ theme_colors = [
     "On_Surface",
     "On_Error",
 ]
+"""Valid theme colors."""

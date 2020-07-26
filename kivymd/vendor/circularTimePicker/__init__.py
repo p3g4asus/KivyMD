@@ -13,62 +13,61 @@ Simple usage
 
 Import the widget with
 
-```python
-from kivy.garden.circulardatetimepicker import CircularTimePicker
-```
+.. code-block:: python
+
+   from kivy.garden.circulardatetimepicker import CircularTimePicker
 
 then use it! That's it!
 
-```python
-c = CircularTimePicker()
-c.bind(time=self.set_time)
-root.add_widget(c)
-```
+.. code-block:: python
+
+   c = CircularTimePicker()
+   c.bind(time=self.set_time)
+   root.add_widget(c)
 
 in Kv language:
 
-```
-<TimeChooserPopup@Popup>:
-    BoxLayout:
-        orientation: "vertical"
+.. code-block:: kv
 
-        CircularTimePicker
+   <TimeChooserPopup@Popup>:
+       BoxLayout:
+           orientation: "vertical"
 
-        Button:
-            text: "Dismiss"
-            size_hint_y: None
-            height: "40dp"
-            on_release: root.dismiss()
-```
+           CircularTimePicker
+
+           Button:
+               text: "Dismiss"
+               size_hint_y: None
+               height: "40dp"
+               on_release: root.dismiss()
 """
 
-import sys
 import datetime
-from math import atan, pi, radians, sin, cos
+import sys
+from math import atan, cos, pi, radians, sin
 
 from kivy.animation import Animation
 from kivy.clock import Clock
-from kivymd.vendor.circleLayout import CircularLayout
-from kivy.graphics import Line, Color, Ellipse
+from kivy.graphics import Color, Ellipse, Line
 from kivy.lang import Builder
+from kivy.metrics import dp
 from kivy.properties import (
-    NumericProperty,
+    AliasProperty,
+    BooleanProperty,
     BoundedNumericProperty,
-    ObjectProperty,
-    StringProperty,
     DictProperty,
     ListProperty,
+    NumericProperty,
+    ObjectProperty,
     OptionProperty,
-    BooleanProperty,
     ReferenceListProperty,
-    AliasProperty,
+    StringProperty,
 )
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
-from kivy.metrics import dp
 
 from kivymd.theming import ThemableBehavior
-
+from kivymd.vendor.circleLayout import CircularLayout
 
 if sys.version_info[0] > 2:
 
@@ -109,7 +108,7 @@ Builder.load_string(
             x: self.scale
             y: self.scale
     canvas.after:
-        PopMatrix            
+        PopMatrix
 
 
 <CircularTimePicker>:
@@ -241,7 +240,7 @@ class CircularNumberPicker(CircularLayout):
     """
 
     number_size_factor = NumericProperty(0.5)
-    """Font size scale factor fot the :class:`Number`s.
+    """Font size scale factor for the :class:`~Number`.
 
     :attr:`number_size_factor`
     is a :class:`~kivy.properties.NumericProperty` and defaults to 0.5.

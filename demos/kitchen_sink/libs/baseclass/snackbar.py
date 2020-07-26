@@ -40,11 +40,18 @@ class KitchenSinkSnackBar(Screen):
                 text="This is a very very very very very very very "
                 "long snackbar!"
             ).show()
+        elif snack_type == "padding":
+            Snackbar(
+                text="This is a snackbar!",
+                padding="20dp",
+                button_text="ACTION",
+                button_color=(1, 0, 1, 1),
+            ).show()
         elif snack_type == "float":
             if not self.snackbar:
                 self.snackbar = Snackbar(
                     text="This is a snackbar!",
-                    button_text="Button",
+                    button_text="BUTTON",
                     duration=3,
                     button_callback=callback,
                 )

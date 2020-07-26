@@ -1,113 +1,105 @@
 """
-User Animation Card
-===================
-
-Copyright (c) 2019 Ivanov Yuri
-
-For suggestions and questions:
-<kivydevelopment@gmail.com>
-
-This file is distributed under the terms of the same license,
-as the Kivy framework.
+Components/User Animation Card
+==============================
 
 Example
 -------
 
-from kivymd.app import MDApp
-from kivy.lang import Builder
-from kivy.factory import Factory
+.. code-block:: python
 
-from kivymd.toast import toast
-from kivymd.theming import ThemeManager
-from kivymd.uix.useranimationcard import MDUserAnimationCard
-from kivymd.uix.button import MDIconButton
-from kivymd.uix.list import ILeftBodyTouch
+    from kivymd.app import MDApp
+    from kivy.lang import Builder
+    from kivy.factory import Factory
 
-# Your content for a contact card.
-Builder.load_string('''
-#:import get_hex_from_color kivy.utils.get_hex_from_color
+    from kivymd.toast import toast
+    from kivymd.theming import ThemeManager
+    from kivymd.uix.useranimationcard import MDUserAnimationCard
+    from kivymd.uix.button import MDIconButton
+    from kivymd.uix.list import ILeftBodyTouch
 
-
-<TestAnimationCard@BoxLayout>
-    orientation: 'vertical'
-    padding: dp(10)
-    spacing: dp(10)
-    size_hint_y: None
-    height: self.minimum_height
-
-    BoxLayout:
-        size_hint_y: None
-        height: self.minimum_height
-
-        Widget:
-        MDRoundFlatButton:
-            text: "Free call"
-        Widget:
-        MDRoundFlatButton:
-            text: "Free message"
-        Widget:
-
-    OneLineIconListItem:
-        text: "Video call"
-        IconLeftSampleWidget:
-            icon: 'camera-front-variant'
-
-    TwoLineIconListItem:
-        text: "Call Viber Out"
-        secondary_text: "[color=%s]Advantageous rates for calls[/color]" % get_hex_from_color(app.theme_cls.primary_color)
-        IconLeftSampleWidget:
-            icon: 'phone'
-
-    TwoLineIconListItem:
-        text: "Call over mobile network"
-        secondary_text: "[color=%s]Operator's tariffs apply[/color]" % get_hex_from_color(app.theme_cls.primary_color)
-        IconLeftSampleWidget:
-            icon: 'remote'
-''')
+    # Your content for a contact card.
+    Builder.load_string('''
+    #:import get_hex_from_color kivy.utils.get_hex_from_color
 
 
-class IconLeftSampleWidget(ILeftBodyTouch, MDIconButton):
-    pass
+    <TestAnimationCard@MDBoxLayout>
+        orientation: 'vertical'
+        padding: dp(10)
+        spacing: dp(10)
+        adaptive_height: True
+
+        MDBoxLayout:
+            adaptive_height: True
+
+            Widget:
+            MDRoundFlatButton:
+                text: "Free call"
+            Widget:
+            MDRoundFlatButton:
+                text: "Free message"
+            Widget:
+
+        OneLineIconListItem:
+            text: "Video call"
+            IconLeftSampleWidget:
+                icon: 'camera-front-variant'
+
+        TwoLineIconListItem:
+            text: "Call Viber Out"
+            secondary_text: "[color=%s]Advantageous rates for calls[/color]" % get_hex_from_color(app.theme_cls.primary_color)
+            IconLeftSampleWidget:
+                icon: 'phone'
+
+        TwoLineIconListItem:
+            text: "Call over mobile network"
+            secondary_text: "[color=%s]Operator's tariffs apply[/color]" % get_hex_from_color(app.theme_cls.primary_color)
+            IconLeftSampleWidget:
+                icon: 'remote'
+    ''')
 
 
-class Example(MDApp):
-    title = "Example Animation Card"
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.user_animation_card = None
-
-    def build(self):
-        def main_back_callback():
-            toast('Close card')
-
-        if not self.user_animation_card:
-            self.user_animation_card = MDUserAnimationCard(
-                user_name="Lion Lion",
-                path_to_avatar="./assets/african-lion-951778_1280.jpg",
-                callback=main_back_callback)
-            self.user_animation_card.box_content.add_widget(
-                Factory.TestAnimationCard())
-        self.user_animation_card.open()
+    class IconLeftSampleWidget(ILeftBodyTouch, MDIconButton):
+        pass
 
 
-Example().run()
+    class Example(MDApp):
+        title = "Example Animation Card"
+
+        def __init__(self, **kwargs):
+            super().__init__(**kwargs)
+            self.user_animation_card = None
+
+        def build(self):
+            def main_back_callback():
+                toast('Close card')
+
+            if not self.user_animation_card:
+                self.user_animation_card = MDUserAnimationCard(
+                    user_name="Lion Lion",
+                    path_to_avatar="./assets/african-lion-951778_1280.jpg",
+                    callback=main_back_callback)
+                self.user_animation_card.box_content.add_widget(
+                    Factory.TestAnimationCard())
+            self.user_animation_card.open()
+
+
+    Example().run()
 """
 
 
-from kivy.clock import Clock
 from kivy.animation import Animation
+from kivy.clock import Clock
 from kivy.core.window import Window
-from kivy.metrics import dp, sp
-from kivy.properties import ObjectProperty, StringProperty, ListProperty
 from kivy.lang import Builder
+from kivy.metrics import dp, sp
+from kivy.properties import ListProperty, ObjectProperty, StringProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.modalview import ModalView
 
+from kivymd.theming import ThemableBehavior
 from kivymd.uix.behaviors import SpecificBackgroundColorBehavior
 from kivymd.uix.button import MDIconButton
-from kivymd.theming import ThemableBehavior
 
 Builder.load_string(
     """
@@ -203,10 +195,9 @@ Builder.load_string(
                 size: self.size
                 pos: self.pos
 
-        GridLayout:
+        MDGridLayout:
             id: box_content
-            size_hint_y: None
-            height: self.minimum_height
+            adaptive_height: True
             cols: 1
 
             canvas:

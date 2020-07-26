@@ -6,7 +6,7 @@ labels: ''
 assignees: ''
 ---
 
-#### Description of the Feature
+### Description of the Feature
 
 Your text
 
@@ -18,7 +18,7 @@ from kivy.app import App
 from kivy.lang import Builder
 
 kv = """
-BoxLayout:
+Screen:
     # KV-Code
 """
 

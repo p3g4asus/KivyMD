@@ -2,13 +2,20 @@ import ast
 import os
 import sys
 
-from kivy.lang import Builder
+from kivy.core.window import Window
 from kivy.factory import Factory
+from kivy.lang import Builder
+from kivy.loader import Loader
 
-from libs.baseclass.dialog_change_theme import KitchenSinkDialogChangeTheme
-from libs.baseclass.list_items import KitchenSinkOneLineLeftIconItem
-
+from kivymd import images_path
 from kivymd.app import MDApp
+from kivymd.uix.expansionpanel import MDExpansionPanel, MDExpansionPanelOneLine
+from libs.baseclass.dialog_change_theme import KitchenSinkDialogChangeTheme
+from libs.baseclass.expansionpanel import KitchenSinkExpansionPanelContent
+
+from libs.baseclass.list_items import (  # NOQA: F401
+    KitchenSinkOneLineLeftIconItem,
+)
 
 if getattr(sys, "frozen", False):  # bundle mode with PyInstaller
     os.environ["KITCHEN_SINK_ROOT"] = sys._MEIPASS
@@ -18,6 +25,7 @@ else:
 os.environ["KITCHEN_SINK_ASSETS"] = os.path.join(
     os.environ["KITCHEN_SINK_ROOT"], f"assets{os.sep}"
 )
+Window.softinput_mode = "below_target"
 
 
 class KitchenSinkApp(MDApp):
@@ -27,13 +35,11 @@ class KitchenSinkApp(MDApp):
         self.dialog_change_theme = None
         self.toolbar = None
         self.data_screens = {}
+        Loader.loading_image = f"{images_path}transparent.png"
 
     def build(self):
         Builder.load_file(
             f"{os.environ['KITCHEN_SINK_ROOT']}/libs/kv/list_items.kv"
-        )
-        Builder.load_file(
-            f"{os.environ['KITCHEN_SINK_ROOT']}/libs/kv/dialog_change_theme.kv"
         )
         return Builder.load_file(
             f"{os.environ['KITCHEN_SINK_ROOT']}/libs/kv/start_screen.kv"
@@ -49,15 +55,18 @@ class KitchenSinkApp(MDApp):
         """Creates a list of items with examples on start screen."""
 
         Builder.load_file(
-            f"{os.environ['KITCHEN_SINK_ROOT']}/libs/kv/base_content.kv"
+            f"{os.environ['KITCHEN_SINK_ROOT']}/libs/kv/dialog_change_theme.kv"
         )
         Builder.load_file(
-            f"{os.environ['KITCHEN_SINK_ROOT']}/libs/kv/toolbar.kv"
+            f"{os.environ['KITCHEN_SINK_ROOT']}/libs/kv/base_content.kv"
         )
+
         with open(f"{os.getcwd()}/screens_data.json") as read_file:
             self.data_screens = ast.literal_eval(read_file.read())
+            data_screens = list(self.data_screens.keys())
+            data_screens.sort()
 
-        for name_item_example in self.data_screens.keys():
+        for name_item_example in data_screens:
             self.root.ids.backdrop_front_layer.data.append(
                 {
                     "viewclass": "KitchenSinkOneLineLeftIconItem",
@@ -89,6 +98,12 @@ class KitchenSinkApp(MDApp):
 
     def back_to_home_screen(self):
         self.root.ids.screen_manager.current = "home"
+
+    def switch_theme_style(self):
+        self.theme_cls.theme_style = (
+            "Light" if self.theme_cls.theme_style == "Dark" else "Dark"
+        )
+        self.root.ids.backdrop.ids._front_layer.md_bg_color = [0, 0, 0, 0]
 
     def callback_for_menu_items(self, *args):
         from kivymd.toast import toast
@@ -150,6 +165,16 @@ class KitchenSinkApp(MDApp):
         box.add_widget(Factory.ShrinePresplashTile(text="SHRINE"))
         instance.add_widget(box)
         Clock.schedule_once(show_demo_shrine, 1)
+
+    def add_expansion_panel(self, card):
+        content = KitchenSinkExpansionPanelContent()
+        card.add_widget(
+            MDExpansionPanel(
+                icon=f"{os.environ['KITCHEN_SINK_ASSETS']}avatar.png",
+                content=content,
+                panel_cls=MDExpansionPanelOneLine(text="KivyMD v.0.102.1"),
+            )
+        )
 
 
 KitchenSinkApp().run()
