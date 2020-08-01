@@ -82,11 +82,8 @@ class FitImage(BoxLayout):
             if self.keep_ratio is not None:
                 kwargs2['keep_ratio'] = self.keep_ratio
             self.container = AsyncImage(**kwargs2)
-            self.bind(size=self.container.setter('size'))
             self.bind(source=self.container.setter("source"))
             self.container.source = self.source
-            self.size_hint = (None, None)
-            self.container.size = self.size
         self.add_widget(self.container)
 
 
