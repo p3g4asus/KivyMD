@@ -141,6 +141,8 @@ Builder.load_string(
     FitImage:
         id: img
         source: root.source
+        allow_stretch: root.allow_stretch
+        keep_ratio: root.keep_ratio
         x: root.x
         y: root.y if root.overlap or root.box_position == 'header' else box.top
 
@@ -168,6 +170,8 @@ Builder.load_string(
     FitImage:
         id: img
         source: root.source
+        allow_stretch: root.allow_stretch
+        keep_ratio: root.keep_ratio
         x: root.x
         y: root.y if root.overlap or root.box_position == 'header' else box.top
 
@@ -253,6 +257,9 @@ class SmartTile(
     _img_overlay = ObjectProperty()
     _box_overlay = ObjectProperty()
     _box_label = ObjectProperty()
+
+    allow_stretch = BooleanProperty(None, allownone=True)
+    keep_ratio = BooleanProperty(None, allownone=True)
 
     def reload(self):
         self._img_widget.reload()
