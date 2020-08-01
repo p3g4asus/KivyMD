@@ -750,9 +750,9 @@ class BaseListItem(
     divider = OptionProperty(
         "Full", options=["Full", "Inset", None], allownone=True
     )
-    background_color = ListProperty([1, 1, 1, 1])
-    secondary_background_color = ListProperty([1, 1, 1, 1])
-    tertiary_background_color = ListProperty([1, 1, 1, 1])
+    background_color = ListProperty([1, 1, 1, 10000])
+    secondary_background_color = ListProperty([1, 1, 1, 10000])
+    tertiary_background_color = ListProperty([1, 1, 1, 10000])
     """
     Divider mode. Available options are: `'Full'`, `'Inset'`
     and default to `'Full'`.

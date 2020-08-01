@@ -204,7 +204,6 @@ The :class:`~MDIcon` class is inherited from
     :align: center
 """
 
-from kivy.core.window import Window
 __all__ = ("MDLabel", "MDIcon")
 
 from kivy.lang import Builder
@@ -225,7 +224,6 @@ from kivymd.theming_dynamic_text import get_contrast_text_color
 Builder.load_string(
     """
 #:import md_icons kivymd.icon_definitions.md_icons
-#:import Window kivy.core.window.Window
 
 <MDLabel>
     disabled_color: self.theme_cls.disabled_hint_text_color
@@ -233,12 +231,11 @@ Builder.load_string(
 
 
 <BackgroundLabel>
-    background_color: Window.clearcolor
     canvas.before:
         Color:
             rgba: root.background_color
         Rectangle:
-            size: self.size
+            size: self.size if root.background_color[3] != 10000 else (0,0)
             pos: self.pos
 
 <MDIcon>:
@@ -396,9 +393,4 @@ class MDIcon(MDLabel):
     """
 
 class BackgroundLabel(MDLabel):
-    background_color = ListProperty()
-    
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        if 'background_color' not in kwargs:
-            self.background_color = Window.clearcolor
+    background_color = ListProperty([1,1,1,10000])
