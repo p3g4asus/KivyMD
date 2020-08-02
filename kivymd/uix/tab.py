@@ -929,7 +929,10 @@ class MDTabs(ThemableBehavior, SpecificBackgroundColorBehavior, AnchorLayout):
                 "MDTabs can remove only subclass of MDTabsLabel"
             )
         self.tab_bar.layout.remove_widget(widget)
+        ln = len(self.carousel.slides)
         for tab in self.carousel.slides:
             if tab.text == widget.text:
+                if self.carousel.index == ln - 1 and ln > 1:
+                    self.carousel.index = ln - 2
                 self.carousel.slides.remove(tab)
                 break
