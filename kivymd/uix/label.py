@@ -235,7 +235,7 @@ Builder.load_string(
         Color:
             rgba: root.background_color
         Rectangle:
-            size: self.size if root.background_color[3] != 10000 else (0,0)
+            size: self.size if root.background_color[3] != 0 else (0,0)
             pos: self.pos
 
 <MDIcon>:
@@ -393,4 +393,4 @@ class MDIcon(MDLabel):
     """
 
 class BackgroundLabel(MDLabel):
-    background_color = ListProperty([1,1,1,10000])
+    background_color = ListProperty([1,1,1,0])

@@ -917,9 +917,11 @@ class MDTabs(ThemableBehavior, SpecificBackgroundColorBehavior, AnchorLayout):
                 )
                 self.tab_bar.layout.add_widget(widget.tab_label)
                 self.carousel.add_widget(widget)
+                # print(f'TAdding {widget.text}')
                 return
             except AttributeError:
                 pass
+        # print(f'TAdding {type(widget)}')
         return super().add_widget(widget)
 
     def remove_widget(self, widget):
@@ -929,10 +931,11 @@ class MDTabs(ThemableBehavior, SpecificBackgroundColorBehavior, AnchorLayout):
                 "MDTabs can remove only subclass of MDTabsLabel"
             )
         self.tab_bar.layout.remove_widget(widget)
-        ln = len(self.carousel.slides)
+        # ln = len(self.carousel.slides)
         for tab in self.carousel.slides:
-            if tab.text == widget.text:
-                if self.carousel.index == ln - 1 and ln > 1:
-                    self.carousel.index = ln - 2
-                self.carousel.slides.remove(tab)
+            if tab.tab_label == widget:
+                # if self.carousel.index == ln - 1 and ln > 1:
+                #    self.carousel.index = ln - 2
+                self.carousel.remove_widget(tab)
+                # print('TRemove!!')
                 break

@@ -32,7 +32,7 @@ import os
 
 from kivy.logger import Logger
 
-__version__ = "0.104.91"
+__version__ = "0.1041.1"
 """KivyMD version."""
 
 path = os.path.dirname(__file__)
