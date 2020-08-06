@@ -564,11 +564,7 @@ class MDDialog(BaseDialog):
         )
 
     def edit_padding_for_item(self, instance_item):
-        if isinstance(instance_item, (OneLineAvatarListItem,
-                                       ThreeLineAvatarListItem,
-                                       OneLineIconListItem,
-                                       ThreeLineIconListItem)):
-            instance_item.ids._left_container.x = 0
+        instance_item.ids._left_container.x = 0
         instance_item._txt_left_pad = "56dp"
 
     def create_items(self):
@@ -578,7 +574,11 @@ class MDDialog(BaseDialog):
         for item in self.items:
             if issubclass(item.__class__, BaseListItem):
                 height += item.height  # calculate height contents
-                self.edit_padding_for_item(item)
+                if isinstance(item, (OneLineAvatarListItem,
+                                     ThreeLineAvatarListItem,
+                                     OneLineIconListItem,
+                                     ThreeLineIconListItem)):
+                    self.edit_padding_for_item(item)
                 self.ids.box_items.add_widget(item)
 
         if height > Window.height:
