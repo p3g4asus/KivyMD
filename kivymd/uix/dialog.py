@@ -564,7 +564,7 @@ class MDDialog(BaseDialog):
         )
 
     def edit_padding_for_item(self, instance_item):
-        if isinstance(item.__class__, (OneLineAvatarListItem,
+        if isinstance(instance_item, (OneLineAvatarListItem,
                                        ThreeLineAvatarListItem,
                                        OneLineIconListItem,
                                        ThreeLineIconListItem)):
