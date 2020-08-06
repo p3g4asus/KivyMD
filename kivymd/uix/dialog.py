@@ -80,7 +80,13 @@ from kivymd.material_resources import DEVICE_TYPE
 from kivymd.theming import ThemableBehavior
 from kivymd.uix.button import BaseButton
 from kivymd.uix.card import MDSeparator
-from kivymd.uix.list import BaseListItem
+from kivymd.uix.list import (
+    BaseListItem,
+    OneLineAvatarListItem,
+    OneLineIconListItem,
+    ThreeLineAvatarListItem,
+    ThreeLineIconListItem
+)
 
 Builder.load_string(
     """
@@ -558,7 +564,11 @@ class MDDialog(BaseDialog):
         )
 
     def edit_padding_for_item(self, instance_item):
-        instance_item.ids._left_container.x = 0
+        if issubclass(item.__class__, (OneLineAvatarListItem,
+                                       ThreeLineAvatarListItem,
+                                       OneLineIconListItem,
+                                       ThreeLineIconListItem)):
+            instance_item.ids._left_container.x = 0
         instance_item._txt_left_pad = "56dp"
 
     def create_items(self):
